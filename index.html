@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Record Your Voice</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Latest compiled and minified Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script> function checkUsername(){
+      // console.log(document.getElementById("user").value)
+      if( document.getElementById("user").value === '')
+      { 
+        // console.log(document.getElementById("recordButton").disabled);
+        document.getElementById("recordButton").disabled = true;}
+      else{
+        // console.log(document.getElementById("recordButton").disabled);
+        document.getElementById("recordButton").disabled = false;
+      }
+    }</script>
+  </head>
+
+<body class="vsc-initialized">
+  <div style ="width:55%;left:0;height: 100%;float: left;">
+  <h1>Record Your Voice</h1>
+  <p>Instructions: </p>
+    <ol>
+      <li>Select each Transcript from the right list one at a time </li>
+      <li>Press Record Button and read out the transcript and click stop to finish recordings</li>
+      
+      <li>Record your voice <b>5</b> times with variations</li>
+      <li><b>Make Sure to enter your name</b></li>
+      <li><b>Save</b> the recording if satisfied else delete</li>
+      <li>Repeat and select the next transcript</li>
+    </ol>
+
+  <div class="user-name">
+    <p>Your Name: </p>
+    <input type="text" id="user" onkeyup="checkUsername()">
+  </div>
+  <br>
+    <p id="tvalue"><b>Transcript: </b></p>
+  <div id="controls">
+   <button id="recordButton" disabled="">Record</button>
+   <button id="pauseButton" disabled="">Pause</button>
+   <button id="stopButton" disabled="">Stop</button>
+  </div>
+  <div id="formats">Provide 5 recordings for the given transcript</div>
+  <p><strong>Recordings:</strong></p>
+  <ul id="recordingsList"></ul>
+  </div>
+   <div style ="width:45%;height:100%;right:0;border:none;float: right;"> 
+   <iframe id = "parent-iframe" style= "width:100%;height: 700px;position: relative;border: none;" src = "transcripts.html">
+      </iframe>
+   </div>
+  </body>
+
+    <!-- inserting these scripts at the end to be able to use all the elements in the DOM -->
+  <script src="https://cdn.rawgit.com/mattdiamond/Recorderjs/08e7abd9/dist/recorder.js"></script>
+  <script src="js/app.js"></script>
+  <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+    $("#parent-iframe", window.parent.document).height(document.body.scrollHeight);
+    });
+    </script>
+</html>
