@@ -10,7 +10,7 @@ $output = $_FILES['audio_data']['name'].".wav"; //letting the client control the
 
 
 
-$arr = explode('_',$_FILES['audio_data']['name'],2);
+$arr = explode('_',$_FILES['audio_data']['name'],3);
 $username = $arr[1];
 // $output = $username.".wav"; //letting the client control the filename is a rather bad idea
 $transcriptNo = $arr[0];
