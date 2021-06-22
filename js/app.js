@@ -152,14 +152,14 @@ function createDownloadLink(blob) {
 	//  recordingNo--;
 	//  console.log(recordingNo);
 	if(confirm("Are you sure you want to delete the Recoring?"))
-	 	{event.target.parentNode.parentNode.removeChild(event.target.parentNode);}
+	 	{event.target.parentNode.parentNode.removeChild(event.target.parentNode);recordingNo--;}
 	}; 
 
 	//add the new audio element to li
 	li.appendChild(au);
 	
 	//add the filename to the li
-	li.appendChild(document.createTextNode(filename+".wav "))
+	li.appendChild(document.createTextNode(transcriptNo + '_'+ username +".wav "))
 
 	//add the save to disk link to li
 	// li.appendChild(link);//
