@@ -16,20 +16,20 @@ $username = $arr[1];
 $transcriptNo = $arr[0];
 // echo $username;
 // echo $transcriptNo;
-$dir = './audio/' . $transcriptNo .'/'; 
+$dir = './audio/' . $username .'/'; 
 // echo $dir;
 if(is_dir($dir)){
-    if(file_exists($dir . $output)){
-        echo "File already exists";
-    }
-    else{
+//     if(file_exists($dir . $output)){
+//         echo "File already exists";
+//     }
+//     else{
         if(move_uploaded_file($input,$dir . $output)){
             echo "Upload successful";
         }
         else{
             echo "Upload unsuccessful";
         } 
-    }
+//     }
      
 }
 else{
