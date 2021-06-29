@@ -130,9 +130,11 @@ function createDownloadLink(blob) {
 	
 	var url = URL.createObjectURL(blob);
 	var au = document.createElement('audio');
+	au.style.marginBottom='10px'
 	var li = document.createElement('li');
+	li.style.display='inline-flex'
 	// var link = document.createElement('a');//
-	var del = document.createElement('a');
+	var del = document.createElement('button');
 
 	//name of .wav file to use during upload and download (without extendion)
 	// var filename = new Date().toISOString();//
@@ -152,39 +154,52 @@ function createDownloadLink(blob) {
 	//  recordingNo--;
 	//  console.log(recordingNo);
 	if(confirm("Are you sure you want to delete the Recoring?"))
-	 	{event.target.parentNode.parentNode.removeChild(event.target.parentNode);recordingNo--;}
+	 	{	
+			grandparent=event.target.parentNode.parentNode;
+			parent=event.target.parentNode;
+			index=Array.prototype.indexOf.call(grandparent.children,parent);
+			grandparent.removeChild(grandparent.childNodes[index-1]);
+			grandparent.removeChild(grandparent.childNodes[index-1]);
+			// event.target.parentNode.parentNode.removeChild(event.target.parentNode);
+			recordingNo--;}
 	}; 
 
 	//add the new audio element to li
-	li.appendChild(au);
+	// li.appendChild(au);
 	
 	//add the filename to the li
+	
 	li.appendChild(document.createTextNode(transcriptNo + '_'+ username +".wav "))
 
 	//add the save to disk link to li
 	// li.appendChild(link);//
 	
 	//save link
-	var upload = document.createElement('a');
+	var upload = document.createElement('button');
+	upload.style.marginLeft='10px'
+	upload.style.marginRight='1px'
 	upload.href="#";
+	upload.style.backgroundColor='blue'
 	upload.innerHTML = "Save";
 	upload.addEventListener("click", function(event){
-		  var xhr=new XMLHttpRequest();
-		  xhr.onload=function(e) {
-		      if(this.readyState === 4) {
-		          console.log("Server returned: ",e.target.responseText);
-		      }
-		  };
-		  var fd=new FormData();
-		  fd.append("audio_data",blob, filename);
-		//   fd.append("username",username);
-		//   fd.append("transcriptNo",transcriptNo);
-		  xhr.open("POST","upload.php",true);
-		  xhr.send(fd);
+		upload.style.backgroundColor='purple'
+		var xhr=new XMLHttpRequest();
+		xhr.onload=function(e) {
+			if(this.readyState === 4) {
+				console.log("Server returned: ",e.target.responseText);
+			}
+		};
+		var fd=new FormData();
+		fd.append("audio_data",blob, filename);
+	//   fd.append("username",username);
+	//   fd.append("transcriptNo",transcriptNo);
+		xhr.open("POST","upload.php",true);
+		xhr.send(fd);
 	})
 	// li.appendChild(document.createTextNode (" "))//add a space in between
 	li.appendChild(upload)//add the upload link to li
 	li.appendChild(del)
-	//add the li element to the ol
+	recordingsList.appendChild(au)
+		//add the li element to the ol
 	recordingsList.appendChild(li);
 }
